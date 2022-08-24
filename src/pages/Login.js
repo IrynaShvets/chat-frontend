@@ -11,7 +11,7 @@ export default function Login() {
   const [values, setValues] = useState({ username: "", password: "" });
 
   useEffect(() => {
-    if (localStorage.getItem("chat-app-user")) {
+    if (localStorage.getItem("process.env.REACT_APP_LOCALSTORAGE")) {
       navigate("/");
     }
   }, []);
@@ -53,7 +53,7 @@ export default function Login() {
         });
       }
       if (data.status === true) {
-        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        localStorage.setItem("process.env.REACT_APP_LOCALSTORAGE", JSON.stringify(data.user));
 
         navigate("/");
       }

@@ -20,10 +20,10 @@ export default function Chat() {
   const [error, setError] = useState(null);
 
   useEffect(async () => {
-    if (!localStorage.getItem("chat-app-user")) {
+    if (!localStorage.getItem("process.env.REACT_APP_LOCALSTORAGE")) {
       navigate("/login");
     } else {
-      setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+      setCurrentUser(await JSON.parse(localStorage.getItem("process.env.REACT_APP_LOCALSTORAGE")));
     }
   }, []);
 

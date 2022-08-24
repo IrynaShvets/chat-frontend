@@ -17,7 +17,7 @@ export default function Register() {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("chat-app-user")) {
+    if (localStorage.getItem("process.env.REACT_APP_LOCALSTORAGE")) {
       navigate("/");
     }
   }, []);
@@ -74,7 +74,10 @@ export default function Register() {
         });
       }
       if (data.status === true) {
-        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        localStorage.setItem(
+          "process.env.REACT_APP_LOCALSTORAGE",
+          JSON.stringify(data.user)
+        );
         navigate("/");
       }
     }

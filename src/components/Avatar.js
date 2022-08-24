@@ -16,7 +16,7 @@ export default function Avatar() {
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
 
   useEffect(async () => {
-    if (!localStorage.getItem("chat-app-user")) navigate("/login");
+    if (!localStorage.getItem("process.env.REACT_APP_LOCALSTORAGE")) navigate("/login");
   }, []);
 
   const setProfilePicture = async () => {
@@ -26,7 +26,7 @@ export default function Avatar() {
         autoClose: 5000,
       });
     } else {
-      const user = await JSON.parse(localStorage.getItem("chat-app-user"));
+      const user = await JSON.parse(localStorage.getItem("process.env.REACT_APP_LOCALSTORAGE"));
 
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
@@ -35,7 +35,7 @@ export default function Avatar() {
       if (data.isSet) {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
-        localStorage.setItem("chat-app-user", JSON.stringify(user));
+        localStorage.setItem("process.env.REACT_APP_LOCALSTORAGE", JSON.stringify(user));
         navigate("/");
       } else {
         toast.error("Error setting avatar. Please try again.", {
