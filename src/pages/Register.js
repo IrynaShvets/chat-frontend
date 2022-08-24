@@ -143,8 +143,11 @@ const FormContainer = styled.div`
     background-color: #00000076;
     border-radius: 2rem;
     padding: 3rem 5rem;
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
+    @media screen (max-width: 720px) {
     width: 100%;
+  }
+  @media screen and (min-width: 720px) and (max-width: 1080px) {
+    width: 50%;
   }
   }
   h2 {
