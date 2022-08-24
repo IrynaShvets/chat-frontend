@@ -101,6 +101,9 @@ const FormContainer = styled.div`
   gap: 1rem;
   align-items: center;
   background-color: #d8dadd;
+  @media screen and (max-width: 720px) {
+    padding: 15px;
+  }
   }
 
   form {
@@ -111,12 +114,13 @@ const FormContainer = styled.div`
     background-color: #00000076;
     border-radius: 2rem;
     padding: 5rem;
-    @media screen (max-width: 720px) {
-    width: 100%;
-  }
-  @media screen and (min-width: 720px) and (max-width: 1080px) {
-    width: 50%;
-  }
+    @media screen and (max-width: 720px) {
+      width: 100%;
+      max-width: 720px;
+    }
+    @media screen and (min-width: 720px) and (max-width: 1080px) {
+      width: 50%;
+    }
   }
   h2 {
     font-size: 25px;
