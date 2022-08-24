@@ -111,6 +111,9 @@ const FormContainer = styled.div`
     background-color: #00000076;
     border-radius: 2rem;
     padding: 5rem;
+    @media screen and (min-width: 720px) and (max-width: 1080px) {
+    width: 100%;
+  }
   }
   h2 {
     font-size: 25px;
