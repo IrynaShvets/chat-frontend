@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { GrSearch } from "react-icons/gr";
+import { toast } from "react-toastify";
 
 export default function Contacts({ contacts, changeChat, value, onChange }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -16,7 +18,7 @@ export default function Contacts({ contacts, changeChat, value, onChange }) {
         setCurrentUserName(data.username);
         setCurrentUserImage(data.avatarImage);
       } catch (error) {
-        console.error(error);
+        setError(error.message);
       }
     }
     fetchData();
@@ -80,6 +82,7 @@ export default function Contacts({ contacts, changeChat, value, onChange }) {
           </div>
         </Container>
       )}
+      {error && toast.error(error.message)}
     </>
   );
 }

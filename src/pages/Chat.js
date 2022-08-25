@@ -3,17 +3,35 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 import { allUsersRoute, host } from "../utils/APIRoutes";
 import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
+import Background from "../assets/background.png";
+
+const sectionStyle = {
+  width: "590px",
+  height: "600px",
+};
+
+const imageStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundImage: `url(${Background})`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "contain",
+  backgroundSize: "auto auto",
+};
 
 export default function Chat() {
-  const navigate = useNavigate();
-  const socket = useRef();
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState("");
   const [currentUser, setCurrentUser] = useState("");
   const [search, setSearch] = useState("");
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const socket = useRef();
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -28,7 +46,7 @@ export default function Chat() {
           );
         }
       } catch (error) {
-        console.error(error);
+        setError(error.message);
       }
     };
     fetchChat();
@@ -53,7 +71,7 @@ export default function Chat() {
           }
         }
       } catch (error) {
-        console.error(error);
+        setError(error.message);
       }
     };
     fetchChat();
@@ -82,9 +100,19 @@ export default function Chat() {
             changeChat={handleChatChange}
             onChange={changeSearch}
           />
-          <ChatContainer currentChat={currentChat} socket={socket} />
+
+          {!currentChat ? (
+            <section style={imageStyle}>
+              <div style={sectionStyle}>
+                <h2>Hello {currentUser.username}</h2>
+              </div>
+            </section>
+          ) : (
+            <ChatContainer currentChat={currentChat} socket={socket} />
+          )}
         </div>
       </Container>
+      {error && toast.error(error.message)}
     </>
   );
 }

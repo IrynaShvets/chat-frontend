@@ -8,11 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { setAvatarRoute } from "../utils/APIRoutes";
 
 export default function Avatar() {
-  const api = `https://api.multiavatar.com/4645646`;
-  const navigate = useNavigate();
   const [avatars, setAvatars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const apiAvatar = `https://api.multiavatar.com/4645646`;
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -55,20 +56,20 @@ export default function Avatar() {
         const data = [];
         for (let i = 0; i < 4; i++) {
           const image = await axios.get(
-            `${api}/${Math.round(Math.random() * 1000)}`
+            `${apiAvatar}/${Math.round(Math.random() * 1000)}`
           );
           const buffer = new Buffer(image.data);
           data.push(buffer.toString("base64"));
         }
         setAvatars(data);
       } catch (error) {
-        console.error(error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     };
     fetchChat();
-  }, [api]);
+  }, [apiAvatar]);
 
   return (
     <>
@@ -104,6 +105,7 @@ export default function Avatar() {
           </button>
         </Container>
       )}
+      {error && toast.error(error.message)}
     </>
   );
 }
