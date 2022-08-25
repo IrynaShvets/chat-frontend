@@ -96,7 +96,7 @@ export default function ChatContainer({ currentChat, socket }) {
         });
       });
     }
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     const date = setCreatedAt(DATE_NEW);
