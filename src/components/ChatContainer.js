@@ -2,19 +2,27 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChatForm from "./ChatForm";
 import Logout from "./Logout";
-import { v4 as uuidv4 } from "uuid";
+import { v4 } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 import { api } from "../services/api";
 
-const DATE_NEW = new Date().toLocaleString();
-
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [createdAt, setCreatedAt] = useState("");
+  const [date, setDate] = useState(
+    new Date(Date.now()).getDay() +
+      "/" +
+      new Date(Date.now()).getMonth() +
+      "/" +
+      new Date(Date.now()).getFullYear() +
+      " " +
+      new Date(Date.now()).getHours() +
+      ":" +
+      new Date(Date.now()).getMinutes()
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [valueApi, setValueApi] = useState();
@@ -26,7 +34,6 @@ export default function ChatContainer({ currentChat, socket }) {
         const { value } = await api();
         setTimeout(() => {
           setValueApi(value);
-          console.log(value);
         }, 10000);
       } catch {
         setError(error.message);
@@ -47,6 +54,7 @@ export default function ChatContainer({ currentChat, socket }) {
           from: data._id,
           to: currentChat._id,
         });
+        console.log(data);
         setMessages(response.data);
       } catch (error) {
         setError(error.message);
@@ -79,30 +87,26 @@ export default function ChatContainer({ currentChat, socket }) {
       from: data._id,
       to: currentChat._id,
       message: msg,
-      createdAt: DATE_NEW,
+      date: date,
     });
 
     const msgs = [...messages];
-    msgs.push({ fromSelf: true, message: msg, createdAt: DATE_NEW });
+    msgs.push({ fromSelf: true, message: msg, date: date });
+    setDate(date);
     setMessages(msgs);
   };
-
+  console.log(date);
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-recieve", (msg) => {
         setArrivalMessage({
           fromSelf: false,
           message: msg,
-          createdAt: DATE_NEW,
+          date: date,
         });
       });
     }
   }, [socket]);
-
-  useEffect(() => {
-    const date = setCreatedAt(DATE_NEW);
-    arrivalMessage && setMessages((prev) => [...prev, date, arrivalMessage]);
-  }, [arrivalMessage]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -128,7 +132,7 @@ export default function ChatContainer({ currentChat, socket }) {
         <div className="chat-messages">
           {messages.map((message) => {
             return (
-              <div className="chat-item" ref={scrollRef} key={uuidv4()}>
+              <div className="chat-item" ref={scrollRef} key={v4()}>
                 <div
                   className={`message ${
                     message.fromSelf ? "sended" : "recieved"
@@ -138,12 +142,13 @@ export default function ChatContainer({ currentChat, socket }) {
                     <p>{message.message}</p>
                   </div>
 
-                  <p className="content-date">{createdAt}</p>
+                  <p className="content-date">{date}</p>
                 </div>
               </div>
             );
           })}
-          {valueApi && (
+
+          {valueApi && currentChat && (
             <p className="jokes" ref={scrollRef}>
               {valueApi}
             </p>

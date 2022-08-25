@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import { registerRoute } from "../utils/APIRoutes";
-import Background from "../assets/background.png";
+import Background from "../assets/background1.png";
 
 const sectionStyle = {
   height: "100vh",

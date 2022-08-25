@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { allUsersRoute, host } from "../utils/APIRoutes";
 import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
-import Background from "../assets/background.png";
+import Background from "../assets/background3.png";
 
 const sectionStyle = {
   width: "590px",

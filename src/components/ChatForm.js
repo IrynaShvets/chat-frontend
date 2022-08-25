@@ -7,7 +7,7 @@ import Picker from "emoji-picker-react";
 export default function ChatForm({ handleSendMsg }) {
   const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  
+
   const handleEmojiPickerhideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
@@ -75,7 +75,7 @@ const Container = styled.div`
       .emoji-picker-react {
         position: absolute;
         top: -350px;
-        background-color: #73757783;
+        background-color: #73757780;
         box-shadow: 0 5px 10px #9a86f3;
         border-color: #9a86f3;
         .emoji-scroll-wrapper::-webkit-scrollbar {

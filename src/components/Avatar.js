@@ -6,6 +6,23 @@ import loader from "../assets/loader.gif";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { setAvatarRoute } from "../utils/APIRoutes";
+import Background from "../assets/background2.png";
+
+const sectionStyle = {
+  height: "100vh",
+  width: "100vw",
+};
+
+const imageStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundImage: `url(${Background})`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  backgroundSize: "auto auto",
+  padding: "40px",
+};
 
 export default function Avatar() {
   const [avatars, setAvatars] = useState([]);
@@ -54,7 +71,7 @@ export default function Avatar() {
       setLoading(true);
       try {
         const data = [];
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
           const image = await axios.get(
             `${apiAvatar}/${Math.round(Math.random() * 1000)}`
           );
@@ -74,36 +91,44 @@ export default function Avatar() {
   return (
     <>
       {loading ? (
-        <Container>
-          <img src={loader} alt="loader" className="loader" />
-        </Container>
+        <section style={imageStyle}>
+          <div style={sectionStyle}>
+            <Container>
+              <img src={loader} alt="loader" className="loader" />
+            </Container>
+          </div>
+        </section>
       ) : (
-        <Container>
-          <div className="title-container">
-            <h1>Pick an Avatar as your profile picture</h1>
+        <section style={imageStyle}>
+          <div style={sectionStyle}>
+            <Container>
+              <div className="title-container">
+                <h1>Choose an avatar for your profile</h1>
+              </div>
+              <div className="avatars">
+                {avatars.map((avatar, index) => {
+                  return (
+                    <div
+                      className={`avatar ${
+                        selectedAvatar === index ? "selected" : ""
+                      }`}
+                    >
+                      <img
+                        src={`data:image/svg+xml;base64,${avatar}`}
+                        alt="avatar"
+                        key={avatar}
+                        onClick={() => setSelectedAvatar(index)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              <button onClick={setProfilePicture} className="submit-btn">
+                Choose avatar
+              </button>
+            </Container>
           </div>
-          <div className="avatars">
-            {avatars.map((avatar, index) => {
-              return (
-                <div
-                  className={`avatar ${
-                    selectedAvatar === index ? "selected" : ""
-                  }`}
-                >
-                  <img
-                    src={`data:image/svg+xml;base64,${avatar}`}
-                    alt="avatar"
-                    key={avatar}
-                    onClick={() => setSelectedAvatar(index)}
-                  />
-                </div>
-              );
-            })}
-          </div>
-          <button onClick={setProfilePicture} className="submit-btn">
-            Set as Profile Picture
-          </button>
-        </Container>
+        </section>
       )}
       {error && toast.error(error.message)}
     </>
@@ -111,28 +136,22 @@ export default function Avatar() {
 }
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  gap: 3rem;
-  background-color: #131324;
-  height: 100vh;
-  width: 100vw;
-
+  padding: 40px;
   .loader {
     max-inline-size: 100%;
   }
 
   .title-container {
+    padding: 40px;
     h1 {
-      color: white;
+      color: #ffffff80;
+      font-size: 40px;
     }
   }
   .avatars {
     display: flex;
     gap: 2rem;
-
     .avatar {
       border: 0.4rem solid transparent;
       padding: 0.4rem;
@@ -147,21 +166,22 @@ const Container = styled.div`
       }
     }
     .selected {
-      border: 0.4rem solid #4e0eff;
+      border: 8px solid #ffffff80;
     }
   }
   .submit-btn {
     background-color: #4e0eff;
-    color: white;
-    padding: 1rem 2rem;
+    color: #00000076;
+    padding: 15px 30px;
     border: none;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    text-transform: uppercase;
+    border-radius: 10px;
+    font-size: 25px;
+    transition: all 0.5s ease-in-out;
     &:hover {
-      background-color: #4e0eff;
+      background-color: #4e0eff50;
+      color: #fff;
     }
   }
 `;
