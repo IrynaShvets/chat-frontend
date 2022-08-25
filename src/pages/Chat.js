@@ -19,9 +19,13 @@ export default function Chat() {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/login");
     } else {
-      setCurrentUser(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)));
+      setCurrentUser(
+        await JSON.parse(
+          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        )
+      );
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (currentUser) {
@@ -39,7 +43,7 @@ export default function Chat() {
         navigate("/setAvatar");
       }
     }
-  }, [currentUser]);
+  }, [currentUser, navigate]);
 
   const handleChatChange = (chat) => {
     setCurrentChat(chat);

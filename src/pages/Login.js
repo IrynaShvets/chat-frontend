@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { loginRoute } from "../utils/APIRoutes";
 
 export default function Login() {
@@ -14,7 +13,7 @@ export default function Login() {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -23,16 +22,10 @@ export default function Login() {
   const validateForm = () => {
     const { username, password } = values;
     if (username === "") {
-      toast.error("Email and Password is required.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
+      toast.error("Email and password is required.");
       return false;
     } else if (password === "") {
-      toast.error("Email and Password is required.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
+      toast.error("Email and password is required.");
       return false;
     }
     return true;
@@ -47,10 +40,7 @@ export default function Login() {
         password,
       });
       if (data.status === false) {
-        toast.error(data.msg, {
-          position: "top-right",
-          autoClose: 5000,
-        });
+        toast.error(data.msg);
       }
       if (data.status === true) {
         localStorage.setItem(
@@ -87,7 +77,6 @@ export default function Login() {
           </span>
         </form>
       </FormContainer>
-      <ToastContainer />
     </>
   );
 }

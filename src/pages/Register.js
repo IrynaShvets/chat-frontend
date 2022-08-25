@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import { registerRoute } from "../utils/APIRoutes";
 
@@ -20,7 +19,7 @@ export default function Register() {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -29,28 +28,16 @@ export default function Register() {
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
     if (password !== confirmPassword) {
-      toast.error("Password and confirm password should be same.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
+      toast.error("Password and confirmation password must be the same.");
       return false;
     } else if (username.length < 3) {
-      toast.error("Username should be greater than 2 characters.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
+      toast.error("Username must contain more than 2 characters.");
       return false;
     } else if (password.length < 6) {
-      toast.error("Password should be equal or greater than 6 characters.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
+      toast.error("Password must be 6 or more characters.");
       return false;
     } else if (email === "") {
-      toast.error("Email is required.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
+      toast.error("Email is required.");
       return false;
     }
 
@@ -68,10 +55,7 @@ export default function Register() {
       });
 
       if (data.status === false) {
-        toast.error(data.msg, {
-          position: "top-right",
-          autoClose: 5000,
-        });
+        toast.error(data.msg);
       }
       if (data.status === true) {
         localStorage.setItem(
@@ -118,7 +102,6 @@ export default function Register() {
           </span>
         </form>
       </FormContainer>
-      <ToastContainer />
     </>
   );
 }

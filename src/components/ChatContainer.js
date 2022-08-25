@@ -36,15 +36,22 @@ export default function ChatContainer({ currentChat, socket }) {
     fetchChat();
   }, [error]);
 
-  useEffect(async () => {
-    const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    );
-    const response = await axios.post(recieveMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-    });
-    setMessages(response.data);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await JSON.parse(
+          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        );
+        const response = await axios.post(recieveMessageRoute, {
+          from: data._id,
+          to: currentChat._id,
+        });
+        setMessages(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
   }, [currentChat]);
 
   useEffect(() => {
@@ -236,4 +243,3 @@ const Container = styled.div`
     }
   }
 `;
-

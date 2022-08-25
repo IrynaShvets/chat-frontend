@@ -3,8 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { Buffer } from "buffer";
 import loader from "../assets/loader.gif";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { setAvatarRoute } from "../utils/APIRoutes";
 
@@ -18,14 +17,11 @@ export default function Avatar() {
   useEffect(async () => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
       navigate("/login");
-  }, []);
+  }, [navigate]);
 
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
-      toast.error("Please select an avatar", {
-        position: "top-right",
-        autoClose: 5000,
-      });
+      toast.error("Please choose an avatar.");
     } else {
       const user = await JSON.parse(
         localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
@@ -44,10 +40,7 @@ export default function Avatar() {
         );
         navigate("/");
       } else {
-        toast.error("Error setting avatar. Please try again.", {
-          position: "top-right",
-          autoClose: 5000,
-        });
+        toast.error("Sorry avatar not set, please try again.");
       }
     }
   };
@@ -97,7 +90,6 @@ export default function Avatar() {
           <button onClick={setProfilePicture} className="submit-btn">
             Set as Profile Picture
           </button>
-          <ToastContainer />
         </Container>
       )}
     </>
