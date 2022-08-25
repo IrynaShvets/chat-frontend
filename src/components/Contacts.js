@@ -45,9 +45,6 @@ export default function Contacts({ contacts, changeChat, value, onChange }) {
                 />
               </LabelSearch>
             </div>
-            {/* <div className="username">
-              <h2>{currentUserName}</h2>
-            </div> */}
           </div>
 
           <div className="contacts">
@@ -80,12 +77,6 @@ export default function Contacts({ contacts, changeChat, value, onChange }) {
   );
 }
 
-/* */
-/* grid - area: chat - message - list;
-  display: flex;
-  flex-direction: column-reverse;
-  padding: 0 20px;
-  overflow-y: scroll; */
 const Container = styled.div`
   display: grid;
   grid-template-rows: 25% 73% 2%;
@@ -164,7 +155,7 @@ const Container = styled.div`
     }
   }
 `;
-/*display: flex;align-items: center;gap: 2rem; justify-content: center; */
+
 const LabelSearch = styled.label``;
 
 const SearchIcon = styled.span`
@@ -172,7 +163,7 @@ const SearchIcon = styled.span`
   top: 97px;
   left: 25px;
 `;
-/*position: relative; width: 100%; */
+
 const InputSearch = styled.input`
   width: 100%;
   color: #000000bf;

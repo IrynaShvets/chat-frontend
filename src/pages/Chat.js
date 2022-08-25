@@ -6,8 +6,6 @@ import styled from "styled-components";
 import { allUsersRoute, host } from "../utils/APIRoutes";
 import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
-import { api } from "../services/api";
-/* import Welcome from "../components/Welcome"; */
 
 export default function Chat() {
   const navigate = useNavigate();
@@ -16,8 +14,6 @@ export default function Chat() {
   const [currentChat, setCurrentChat] = useState("");
   const [currentUser, setCurrentUser] = useState("");
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(async () => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
@@ -26,23 +22,6 @@ export default function Chat() {
       setCurrentUser(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)));
     }
   }, []);
-
-  /* useEffect(() => {
-    const fetchChat = async () => {
-      setLoading(true);
-      try {
-        const { value } = await api();
-        setTimeout(() => {
-          console.log(value);
-        }, 10000);
-      } catch {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchChat();
-  }, [error]); */
 
   useEffect(() => {
     if (currentUser) {
@@ -85,10 +64,6 @@ export default function Chat() {
             changeChat={handleChatChange}
             onChange={changeSearch}
           />
-          {/* 
-            currentChat  === undefined ? (
-            <Welcome />
-          ) : (  ( */}
           <ChatContainer currentChat={currentChat} socket={socket} />
         </div>
       </Container>

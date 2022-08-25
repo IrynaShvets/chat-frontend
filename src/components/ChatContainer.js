@@ -37,7 +37,9 @@ export default function ChatContainer({ currentChat, socket }) {
   }, [error]);
 
   useEffect(async () => {
-    const data = await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY));
+    const data = await JSON.parse(
+      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+    );
     const response = await axios.post(recieveMessageRoute, {
       from: data._id,
       to: currentChat._id,
@@ -48,14 +50,18 @@ export default function ChatContainer({ currentChat, socket }) {
   useEffect(() => {
     const getCurrentChat = async () => {
       if (currentChat) {
-        await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))._id;
+        await JSON.parse(
+          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        )._id;
       }
     };
     getCurrentChat();
   }, [currentChat]);
 
   const handleSendMsg = async (msg) => {
-    const data = await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY));
+    const data = await JSON.parse(
+      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+    );
     socket.current.emit("send-msg", {
       to: currentChat._id,
       from: data._id,
@@ -128,7 +134,11 @@ export default function ChatContainer({ currentChat, socket }) {
             </div>
           );
         })}
-        {valueApi && <p ref={scrollRef}>{valueApi}</p>}
+        {valueApi && (
+          <p className="jokes" ref={scrollRef}>
+            {valueApi}
+          </p>
+        )}
       </div>
 
       <ChatForm handleSendMsg={handleSendMsg} />
@@ -214,5 +224,16 @@ const Container = styled.div`
         color: #fff;
       }
     }
+    .jokes {
+      justify-content: flex-start;
+      background-color: #23292eda;
+      color: #fff;
+      max-width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+      border-radius: 1rem;
+      color: #d1d1d1;
+    }
   }
 `;
+
