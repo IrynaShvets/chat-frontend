@@ -5,6 +5,7 @@ import { Buffer } from "buffer";
 import loader from "../assets/loader.gif";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { XyzTransitionGroup } from "@animxyz/react";
 import { setAvatarRoute } from "../utils/APIRoutes";
 import Background from "../assets/background2.png";
 
@@ -103,7 +104,32 @@ export default function Avatar() {
           <div style={sectionStyle}>
             <Container>
               <div className="title-container">
-                <h1>Choose an avatar for your profile</h1>
+                <div class="example-grid" xyz="fade small stagger">
+                  <div className="squareWrapper">
+                    <div class="square xyz-in squareText">C</div>
+                    <div class="square xyz-in squareText">h</div>
+                    <div class="square xyz-in squareText">o</div>
+                    <div class="square xyz-in squareText">o</div>
+                    <div class="square xyz-in squareText">s</div>
+                    <div class="square xyz-in squareText last">e</div>
+                    <div class="square xyz-in squareText">a</div>
+                    <div class="square xyz-in squareText">v</div>
+                    <div class="square xyz-in squareText">a</div>
+                    <div class="square xyz-in squareText">t</div>
+                    <div class="square xyz-in squareText">a</div>
+                    <div class="square xyz-in squareText">r</div>
+                  </div>
+                </div>
+
+                <XyzTransitionGroup
+                  className="example-grid"
+                  xyz="fade small stagger"
+                >
+                  {false &&
+                    [...Array(26)].map((_, index) => (
+                      <div className="square" key={index} />
+                    ))}
+                </XyzTransitionGroup>
               </div>
               <div className="avatars">
                 {avatars.map((avatar, index) => {

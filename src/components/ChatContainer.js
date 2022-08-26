@@ -12,17 +12,7 @@ export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [date, setDate] = useState(
-    new Date(Date.now()).getDay() +
-      "/" +
-      new Date(Date.now()).getMonth() +
-      "/" +
-      new Date(Date.now()).getFullYear() +
-      " " +
-      new Date(Date.now()).getHours() +
-      ":" +
-      new Date(Date.now()).getMinutes()
-  );
+  const [date, setDate] = useState(new Date(Date.now()).toLocaleString());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [valueApi, setValueApi] = useState();
