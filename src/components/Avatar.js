@@ -6,7 +6,7 @@ import loader from "../assets/loader.gif";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { XyzTransitionGroup } from "@animxyz/react";
-import { setAvatarRoute } from "../utils/APIRoutes";
+import { setAvatarRoute } from "../utils/apiRoutes";
 import Background from "../assets/background2.png";
 
 const sectionStyle = {
@@ -104,20 +104,20 @@ export default function Avatar() {
           <div style={sectionStyle}>
             <Container>
               <div className="title-container">
-                <div class="example-grid" xyz="fade small stagger">
-                  <div className="squareWrapper">
-                    <div class="square xyz-in squareText">C</div>
-                    <div class="square xyz-in squareText">h</div>
-                    <div class="square xyz-in squareText">o</div>
-                    <div class="square xyz-in squareText">o</div>
-                    <div class="square xyz-in squareText">s</div>
-                    <div class="square xyz-in squareText last">e</div>
-                    <div class="square xyz-in squareText">a</div>
-                    <div class="square xyz-in squareText">v</div>
-                    <div class="square xyz-in squareText">a</div>
-                    <div class="square xyz-in squareText">t</div>
-                    <div class="square xyz-in squareText">a</div>
-                    <div class="square xyz-in squareText">r</div>
+                <div className="example-grid" xyz="fade small stagger">
+                  <div classNameName="squareWrapper">
+                    <div className="square xyz-in squareText">C</div>
+                    <div className="square xyz-in squareText">h</div>
+                    <div className="square xyz-in squareText">o</div>
+                    <div className="square xyz-in squareText">o</div>
+                    <div className="square xyz-in squareText">s</div>
+                    <div className="square xyz-in squareText last">e</div>
+                    <div className="square xyz-in squareText">a</div>
+                    <div className="square xyz-in squareText">v</div>
+                    <div className="square xyz-in squareText">a</div>
+                    <div className="square xyz-in squareText">t</div>
+                    <div className="square xyz-in squareText">a</div>
+                    <div className="square xyz-in squareText">r</div>
                   </div>
                 </div>
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loginRoute } from "../utils/APIRoutes";
+import { loginRoute } from "../utils/apiRoutes";
 import Background from "../assets/background.png";
 
 const sectionStyle = {

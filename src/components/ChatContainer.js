@@ -5,14 +5,14 @@ import Logout from "./Logout";
 import { v4 } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
+import { sendMessageRoute, recieveMessageRoute } from "../utils/apiRoutes";
 import { api } from "../services/api";
 
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [date, setDate] = useState(new Date(Date.now()).toLocaleString());
+  const [createdAt, setCreatedAt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [valueApi, setValueApi] = useState();
@@ -44,7 +44,7 @@ export default function ChatContainer({ currentChat, socket }) {
           from: data._id,
           to: currentChat._id,
         });
-        console.log(data);
+
         setMessages(response.data);
       } catch (error) {
         setError(error.message);
@@ -77,22 +77,22 @@ export default function ChatContainer({ currentChat, socket }) {
       from: data._id,
       to: currentChat._id,
       message: msg,
-      date: date,
+      createdAt: msg,
     });
-
     const msgs = [...messages];
-    msgs.push({ fromSelf: true, message: msg, date: date });
-    setDate(date);
+
+    msgs.push({ fromSelf: true, message: msg, createdAt: msg });
+    setCreatedAt(createdAt);
     setMessages(msgs);
   };
-  console.log(date);
+
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-recieve", (msg) => {
         setArrivalMessage({
           fromSelf: false,
           message: msg,
-          date: date,
+          createdAt: msg,
         });
       });
     }
@@ -101,7 +101,7 @@ export default function ChatContainer({ currentChat, socket }) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
+  console.log(messages);
   return (
     <>
       <Container>
@@ -128,16 +128,12 @@ export default function ChatContainer({ currentChat, socket }) {
                     message.fromSelf ? "sended" : "recieved"
                   }`}
                 >
-                  <div className="content ">
-                    <p>{message.message}</p>
-                  </div>
-
-                  <p className="content-date">{date}</p>
+                  <p className="content">{message.message}</p>
+                  <p className="content-date">{message.createdAt}</p>
                 </div>
               </div>
             );
           })}
-
           {valueApi && currentChat && (
             <p className="jokes" ref={scrollRef}>
               {valueApi}
@@ -186,10 +182,10 @@ const Container = styled.div`
     padding: 15px;
     display: flex;
     flex-direction: column;
-
+    gap: 0.5rem;
     background-color: #d8dadd;
     overflow-x: auto;
-    gap: 0.4rem;
+
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
@@ -203,10 +199,7 @@ const Container = styled.div`
     }
     .message {
       display: flex;
-      align-items: center;
       .content {
-        max-width: 40%;
-        overflow-wrap: break-word;
         padding: 15px;
         font-size: 1.1rem;
         border-radius: 1rem;
@@ -242,3 +235,4 @@ const Container = styled.div`
     }
   }
 `;
+

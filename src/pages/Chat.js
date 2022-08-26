@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import { XyzTransitionGroup } from "@animxyz/react";
-import { allUsersRoute, host } from "../utils/APIRoutes";
+import { allUsersRoute, host } from "../utils/apiRoutes";
 import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Background from "../assets/background3.png";
@@ -107,39 +107,39 @@ export default function Chat() {
           {!currentChat ? (
             <section style={imageStyle}>
               <div style={sectionStyle}>
-                <div class="example-grid" xyz="fade small stagger">
+                <div className="example-grid" xyz="fade small stagger">
                   <div className="squareWrapper">
-                    <div class="square xyz-in">
+                    <div className="square xyz-in">
                       <p className="squareText">W</p>
                     </div>
-                    <div class="square xyz-in">
+                    <div className="square xyz-in">
                       <p className="squareText">E</p>
                     </div>
-                    <div class="square xyz-in">
+                    <div className="square xyz-in">
                       <p className="squareText">L</p>
                     </div>
-                    <div class="square xyz-in">
+                    <div className="square xyz-in">
                       <p className="squareText">C</p>
                     </div>
-                    <div class="square xyz-in">
+                    <div className="square xyz-in">
                       <p className="squareText">O</p>
                     </div>
-                    <div class="square xyz-in">
+                    <div className="square xyz-in">
                       <p className="squareText">M</p>
                     </div>
-                    <div class="square xyz-in">
+                    <div className="square xyz-in">
                       <p className="squareText">E</p>
                     </div>
-                    <div class="last square xyz-in">
+                    <div className="last square xyz-in">
                       <p className="squareText">!</p>
                     </div>
-                    <div class="userName square xyz-in">
+                    <div className="userName square xyz-in">
                       <h3 className="squareText">{currentUser.username}</h3>
                     </div>
                   </div>
 
                   <div
-                    class="square xyz-in"
+                    className="square xyz-in"
                     xyz="big iterate-infinite duration-20 direction-alternate"
                   >
                     <img src={image} alt="" width={400} />
