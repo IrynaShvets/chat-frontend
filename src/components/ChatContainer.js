@@ -101,7 +101,7 @@ export default function ChatContainer({ currentChat, socket }) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-  console.log(messages);
+
   return (
     <>
       <Container>
@@ -235,4 +235,3 @@ const Container = styled.div`
     }
   }
 `;
-
