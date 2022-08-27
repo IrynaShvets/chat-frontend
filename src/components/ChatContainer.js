@@ -17,6 +17,8 @@ export default function ChatContainer({ currentChat, socket }) {
   const [error, setError] = useState(null);
   const [valueApi, setValueApi] = useState();
 
+  console.log(messages);
+
   useEffect(() => {
     const fetchChat = async () => {
       setLoading(true);
