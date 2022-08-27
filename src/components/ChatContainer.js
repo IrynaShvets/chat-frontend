@@ -5,7 +5,7 @@ import Logout from "./Logout";
 import { v4 } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { sendMessageRoute, recieveMessageRoute } from "../utils/apiRoutes";
+import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 import { api } from "../services/api";
 
 export default function ChatContainer({ currentChat, socket }) {

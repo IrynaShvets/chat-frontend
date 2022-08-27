@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import { XyzTransitionGroup } from "@animxyz/react";
-import { allUsersRoute, host } from "../utils/apiRoutes";
+import { allUsersRoute, host } from "../utils/APIRoutes";
 import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Background from "../assets/background3.png";

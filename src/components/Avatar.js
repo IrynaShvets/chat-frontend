@@ -6,7 +6,7 @@ import loader from "../assets/loader.gif";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { XyzTransitionGroup } from "@animxyz/react";
-import { setAvatarRoute } from "../utils/apiRoutes";
+import { setAvatarRoute } from "../utils/APIRoutes";
 import Background from "../assets/background2.png";
 
 const sectionStyle = {
