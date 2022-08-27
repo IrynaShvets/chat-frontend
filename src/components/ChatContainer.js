@@ -12,12 +12,9 @@ export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [createdAt, setCreatedAt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [valueApi, setValueApi] = useState();
-
-  console.log(messages);
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -66,7 +63,7 @@ export default function ChatContainer({ currentChat, socket }) {
     getCurrentChat();
   }, [currentChat]);
 
-  const handleSendMsg = async (msg) => {
+  const handleSendMsg = async (msg, created) => {
     const data = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
     );
@@ -79,22 +76,21 @@ export default function ChatContainer({ currentChat, socket }) {
       from: data._id,
       to: currentChat._id,
       message: msg,
-      createdAt: msg,
+      created: created,
     });
     const msgs = [...messages];
-
-    msgs.push({ fromSelf: true, message: msg, createdAt: msg });
-    setCreatedAt(createdAt);
+    console.log(msgs);
+    msgs.push({ fromSelf: true, message: msg, created });
     setMessages(msgs);
   };
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on("msg-recieve", (msg) => {
+      socket.current.on("msg-recieve", (msg, created) => {
         setArrivalMessage({
           fromSelf: false,
           message: msg,
-          createdAt: msg,
+          created,
         });
       });
     }
@@ -131,7 +127,7 @@ export default function ChatContainer({ currentChat, socket }) {
                   }`}
                 >
                   <p className="content">{message.message}</p>
-                  <p className="content-date">{message.createdAt}</p>
+                  <p className="content-date">{message.created}</p>
                 </div>
               </div>
             );
@@ -215,7 +211,10 @@ const Container = styled.div`
       justify-content: flex-end;
       .content {
         background-color: #73757783;
-        color: #00000080;
+        color: #000000;
+      }
+      .content-date {
+        color: #00000076;
       }
     }
     .recieved {
@@ -223,6 +222,9 @@ const Container = styled.div`
       .content {
         background-color: #23292eda;
         color: #fff;
+      }
+      .content-date {
+        color: #00000076;
       }
     }
     .jokes {
