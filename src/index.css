@@ -28,11 +28,12 @@ body {
 ul {
   list-style: none;
 }
-
+ 
 .squareWrapper {
-  display: flex;
+   display: flex;
   margin-bottom: 50px;
-}
+} 
+
 .squareText{
   color: rgb(204, 215, 250);
   font-size: 50px; 

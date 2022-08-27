@@ -105,7 +105,7 @@ export default function Avatar() {
             <Container>
               <div className="title-container">
                 <div className="example-grid" xyz="fade small stagger">
-                  <div classNameName="squareWrapper">
+                  <SquareWrapper>
                     <div className="square xyz-in squareText">C</div>
                     <div className="square xyz-in squareText">h</div>
                     <div className="square xyz-in squareText">o</div>
@@ -118,7 +118,7 @@ export default function Avatar() {
                     <div className="square xyz-in squareText">t</div>
                     <div className="square xyz-in squareText">a</div>
                     <div className="square xyz-in squareText">r</div>
-                  </div>
+                  </SquareWrapper>
                 </div>
 
                 <XyzTransitionGroup
@@ -126,7 +126,7 @@ export default function Avatar() {
                   xyz="fade small stagger"
                 >
                   {false &&
-                    [...Array(26)].map((_, index) => (
+                    [...Array(12)].map((_, index) => (
                       <div className="square" key={index} />
                     ))}
                 </XyzTransitionGroup>
@@ -162,7 +162,6 @@ export default function Avatar() {
 }
 
 const Container = styled.div`
-  flex-direction: column;
   padding: 40px;
   .loader {
     max-inline-size: 100%;
@@ -210,4 +209,9 @@ const Container = styled.div`
       color: #fff;
     }
   }
+`;
+
+const SquareWrapper = styled.div`
+  display: flex;
+  margin-bottom: 50px;
 `;
