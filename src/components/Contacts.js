@@ -57,7 +57,7 @@ export default function Contacts({ contacts, changeChat, value, onChange }) {
           </div>
 
           <div className="contacts">
-            <h2 className="title">Chat</h2>
+            <h2 className="title">Chats</h2>
             {contacts.map((contact, index) => {
               return (
                 <div
@@ -95,7 +95,6 @@ const Container = styled.div`
   .contacts {
     display: flex;
     flex-direction: column;
-    align-items: center;
     overflow: auto;
     border-bottom: 1px solid #73757783;
     gap: 0.6rem;
@@ -103,17 +102,19 @@ const Container = styled.div`
       width: 0.2rem;
       &-thumb {
         background-color: #ffffff39;
-
         width: 0.1rem;
         border-radius: 1rem;
       }
+    }
+    .title {
+      padding: 30px 15px 30px 15px;
+      color: #5594cf;
     }
     .contact {
       min-height: 80px;
       cursor: pointer;
       width: 100%;
       border-bottom: 1px solid #73757783;
-
       padding: 15px;
       display: flex;
       gap: 1rem;

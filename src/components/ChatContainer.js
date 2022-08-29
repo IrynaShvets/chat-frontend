@@ -72,14 +72,16 @@ export default function ChatContainer({ currentChat, socket }) {
       from: data._id,
       msg,
     });
+
     await axios.post(sendMessageRoute, {
       from: data._id,
       to: currentChat._id,
       message: msg,
       created: created,
     });
+
     const msgs = [...messages];
-    console.log(msgs);
+
     msgs.push({ fromSelf: true, message: msg, created });
     setMessages(msgs);
   };
@@ -132,6 +134,7 @@ export default function ChatContainer({ currentChat, socket }) {
               </div>
             );
           })}
+
           {valueApi && currentChat && (
             <p className="jokes" ref={scrollRef}>
               {valueApi}
@@ -147,7 +150,7 @@ export default function ChatContainer({ currentChat, socket }) {
 }
 
 const Container = styled.div`
-  display: grid;
+  display: inline-grid;
   grid-template-rows: 12% 70% 18%;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
@@ -183,7 +186,6 @@ const Container = styled.div`
     gap: 0.5rem;
     background-color: #d8dadd;
     overflow-x: auto;
-
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
@@ -197,6 +199,7 @@ const Container = styled.div`
     }
     .message {
       display: flex;
+      flex-direction: column;
       .content {
         padding: 15px;
         font-size: 1.1rem;
@@ -208,7 +211,9 @@ const Container = styled.div`
       }
     }
     .sended {
-      justify-content: flex-end;
+      display: grid;
+      justify-content: end;
+      align-self: flex-end;
       .content {
         background-color: #73757783;
         color: #000000;
@@ -218,7 +223,9 @@ const Container = styled.div`
       }
     }
     .recieved {
-      justify-content: flex-start;
+      display: grid;
+      justify-content: start;
+      align-self: flex-start;
       .content {
         background-color: #23292eda;
         color: #fff;
